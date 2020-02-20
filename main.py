@@ -13,19 +13,28 @@ def getCurrencies():
     baseCurrencies = input("Available currencies:\n %s.\nChoose your base: " % availableCurrencies)
     baseCurrencies = baseCurrencies.upper()
     currencies = input("Wybierz waluty do pokazania, wpisz je po spcji: ")
-    currencies = currencies.upper().split(" ")
+    currencies = currencies.upper().split(" ") #list
     newCurrencies = None
     if len(currencies)>1:
-        currencies = ','.join(currencies)
+        newCurrencies = ','.join(currencies)
     else:
-        currencies=''.join(currencies)
+        newCurrencies=''.join(currencies)
 
-    baseCurrenciesResponse = requests.get('https://api.exchangeratesapi.io/latest?base='+baseCurrencies+'&symbols='+currencies).json()
-    date = baseCurrenciesResponse
+    baseCurrenciesResponse = requests.get('https://api.exchangeratesapi.io/latest?base='+baseCurrencies+'&symbols='+newCurrencies)
 
-    print(date)
-    return currencies, baseCurrencies, baseCurrenciesResponse
 
+    data = baseCurrenciesResponse.json()
+    print(data)
+    date = data['date']
+    waluta = []
+    dupa = {}
+    for i in currencies:
+        interation = 0
+        waluta.append(data['rates'][i])
+        dupa.update({i: waluta[interation]})
+        interation +=1
+    print(dupa)
+    return currencies, baseCurrencies, baseCurrenciesResponse, date
 
 getCurrencies()
 
