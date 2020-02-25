@@ -35,7 +35,7 @@ def getCurrentCurrencies(baseCurrencies, currencies):
     keyArray = list(currenciesToArray.keys())
     currenciesArray = list(currenciesToArray.values())
     finalResult = dict(zip(keyArray, currenciesArray))
-    finalResult.update(date = date)
+    finalResult.update(date=date)
     print(finalResult)
     return currencies, baseCurrencies, baseCurrenciesResponse, date, finalResult
 
@@ -44,7 +44,7 @@ def getHistoricalCurrencies(baseCurrencies, currencies):
     begin = input("Enter the start date in USA notation(YYYY-MM-DD): ")
     end = input("Enter end date or don't write anythink to use today date: ")
     if (end or len(end) <= 1):
-        end = date.today()
+        end = str(date.today())
 
     newCurrencies = None
     if len(currencies) > 1:
@@ -57,7 +57,7 @@ def getHistoricalCurrencies(baseCurrencies, currencies):
     print(baseCurrenciesResponse.json())
 
 
-getCurrentCurrencies(baseCurrencies, currencies)
-# getHistoricalCurrencies(baseCurrencies,currencies)
+#getCurrentCurrencies(baseCurrencies, currencies)
+getHistoricalCurrencies(baseCurrencies,currencies)
 
 
