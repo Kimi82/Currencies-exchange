@@ -54,10 +54,15 @@ def getHistoricalCurrencies(baseCurrencies, currencies):
 
     baseCurrenciesResponse = requests.get(
         'https://api.exchangeratesapi.io/history?start_at=' + begin + '&end_at=' + end + '&base=' + baseCurrencies + '&symbols=' + newCurrencies)
-    print(baseCurrenciesResponse.json())
+    baseCurrenciesResponse = baseCurrenciesResponse.json()
+
+    for i in sorted(baseCurrenciesResponse['rates'].keys()):
+        print(i, end="|")
 
 
-#getCurrentCurrencies(baseCurrencies, currencies)
+    print('\n',baseCurrenciesResponse)
+
+        #getCurrentCurrencies(baseCurrencies, currencies)
 getHistoricalCurrencies(baseCurrencies,currencies)
 
 
