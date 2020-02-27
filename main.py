@@ -1,5 +1,6 @@
 import requests
 from datetime import date
+from collections import OrderedDict
 
 
 def checkConnection():
@@ -56,11 +57,9 @@ def getHistoricalCurrencies(baseCurrencies, currencies):
         'https://api.exchangeratesapi.io/history?start_at=' + begin + '&end_at=' + end + '&base=' + baseCurrencies + '&symbols=' + newCurrencies)
     baseCurrenciesResponse = baseCurrenciesResponse.json()
 
-    for i in sorted(baseCurrenciesResponse['rates'].keys()):
-        print(i, end="|")
+    ordered_dict = dict(OrderedDict(sorted(baseCurrenciesResponse['rates'].items(), key=lambda t: t[0])))
+    print(ordered_dict) # sorted
 
-
-    print('\n',baseCurrenciesResponse)
 
         #getCurrentCurrencies(baseCurrencies, currencies)
 getHistoricalCurrencies(baseCurrencies,currencies)
