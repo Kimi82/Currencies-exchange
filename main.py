@@ -1,6 +1,10 @@
 import requests
 from datetime import date
 from collections import OrderedDict
+import matplotlib.pyplot as plt
+import numpy as np
+import pandas as pd
+import seaborn as sns
 
 
 def checkConnection():
@@ -59,9 +63,20 @@ def getHistoricalCurrencies(baseCurrencies, currencies):
 
     ordered_dict = dict(OrderedDict(sorted(baseCurrenciesResponse['rates'].items(), key=lambda t: t[0])))
     print(ordered_dict) # sorted
+    #for key in ordered_dict.values():
+        #print(key.values())
+        
+        #obliczone=1/key.values()
+    datesArray = []
 
-
-        #getCurrentCurrencies(baseCurrencies, currencies)
+    for dates in ordered_dict.keys():
+        datesArray.append(dates)
+    print(datesArray)
+    print(len(datesArray))
+#getCurrentCurrencies(baseCurrencies, currencies)
 getHistoricalCurrencies(baseCurrencies,currencies)
 
+#sns.set(style="whitegrid")
 
+
+#plt.show()
