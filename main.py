@@ -62,7 +62,7 @@ def getHistoricalCurrencies(baseCurrencies, currencies):
     baseCurrenciesResponse = baseCurrenciesResponse.json()
 
     ordered_dict = dict(OrderedDict(sorted(baseCurrenciesResponse['rates'].items(), key=lambda t: t[0])))
-    print(ordered_dict) # sorted
+    #print(ordered_dict) # sorted
     #for key in ordered_dict.values():
         #print(key.values())
         
@@ -71,8 +71,17 @@ def getHistoricalCurrencies(baseCurrencies, currencies):
 
     for dates in ordered_dict.keys():
         datesArray.append(dates)
-    print(datesArray)
-    print(len(datesArray))
+    currenciesArray = list(ordered_dict[datesArray[2]].keys())
+
+
+    i=0
+    y=0
+    while i>=len(datesArray) and y>=len(currenciesArray):
+        ordered_dict[datesArray[i]][currenciesArray[y]] = 1/ordered_dict[datesArray[i]][currenciesArray[y]]
+        #ordered_dict[currenciesArray[i]].update({currenciesArray[i]: 1/ordered_dict[datesArray[i]][currenciesArray[i]]})
+        y+=1
+        i+=1
+    print(ordered_dict)
 #getCurrentCurrencies(baseCurrencies, currencies)
 getHistoricalCurrencies(baseCurrencies,currencies)
 
